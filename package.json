@@ -3,12 +3,13 @@
   "version": "0.0.1",
   "description": "Everything you need to get a graphql api gateway up and running for your moleculer services",
   "scripts": {
-    "prepublish": "yarn build",
+    "prepublish": "yarn run snyk-protect && yarn build",
     "clean": "rm -rf lib && rm -rf node6",
     "build": "yarn clean && yarn build:node8 && yarn build:node6",
     "build:node8": "babel src -d lib",
     "build:node6": "BABEL_ENV=node6 babel src -d node6",
-    "test": "yarn build && docker-compose up -d mqtt && sleep 5 && jest"
+    "test": "yarn build && docker-compose up -d mqtt && sleep 5 && jest",
+    "snyk-protect": "snyk protect"
   },
   "main": "lib/index.js",
   "author": "Brad Decker",
@@ -20,7 +21,8 @@
     "lodash": "^4.17.4",
     "lodash.difference": "^4.5.0",
     "moleculer": "^0.11.1",
-    "selectn": "^1.1.2"
+    "selectn": "^1.1.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "amqplib": "^0.5.1",
@@ -35,5 +37,6 @@
     "flow-bin": "^0.56.0",
     "jest": "^21.2.1",
     "mqtt": "^2.13.0"
-  }
+  },
+  "snyk": true
 }
